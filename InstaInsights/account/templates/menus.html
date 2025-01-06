@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menus</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to bottom, #fdf497, #fd5949, #d6249f, #285AEB);
+            color: white;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            padding-top: 60px;
+            padding-bottom: 40px;
+        }
+
+        .signout-button {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .signout-button:hover {
+            opacity: 0.9;
+        }
+
+        .welcome-message {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .file-upload {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .file-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .result-message {
+            font-size: 1.2rem;
+            font-weight: bold;
+            padding-bottom: 60px;
+        }
+
+        .upload-button {
+            background-color: #3897f0;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .upload-button:hover {
+            opacity: 0.9;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        .lists-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            width: 90%;
+            margin: 0 auto; /* Center the grid */
+        }
+
+        .list-box {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 10px;
+            max-height: 200px;
+            overflow-y: scroll;
+            height: 200px; /* Ensure all boxes are the same height */
+            width: 100%; /* Ensure all boxes are the same width */
+        }
+
+        .list-box h3 {
+            margin: 0 0 10px;
+            font-size: 1.2rem;
+        }
+
+        .list-box ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .list-box li {
+            padding: 5px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .list-box li:last-child {
+            border-bottom: none;
+        }
+
+        /* Spinner and overlay */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .spinner {
+            border: 8px solid rgba(255, 255, 255, 0.3);
+            border-top: 8px solid white;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .search-bar {
+            width: 90%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1rem;
+        }
+
+        .search-bar::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .search-bar:focus {
+            outline: none;
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .lists-container {
+                grid-template-columns: 1fr; /* One container per row on small screens */
+            }
+        }
+
+        #latest-file-upload, #previous-file-upload {
+            margin: 0; /* Remove default margins */
+        }
+    </style>
+</head>
+<body>
+    <!-- Sign Out Button -->
+    <form method="POST" action="{% url 'account:signout' %}">
+        {% csrf_token %}
+        <button type="submit" class="signout-button">Sign Out</button>
+    </form>
+
+    <!-- Welcome Message -->
+    <div class="welcome-message">Welcome, {{ user.username }}</div>
+
+    <p id="latest-file-upload">
+        Latest File Upload:
+        {{ latest_file_upload|date:"Y-m-d H:i:s" }}
+        {% if latest_file_upload %}
+            ({{ latest_file_upload|date:"e" }})
+        {% else %}
+            Never
+        {% endif %}
+    </p>
+    <p id="previous-file-upload">
+        Previous File Upload:
+        {{ previous_file_upload|date:"Y-m-d H:i:s" }}
+        {% if previous_file_upload %}
+            ({{ previous_file_upload|date:"e" }})
+        {% else %}
+            Never
+        {% endif %}
+    </p>
+
+    <!-- File Upload Section -->
+    <div class="file-upload">
+        <div id="file-name" class="file-name">No file selected</div>
+        <label for="file-input" class="upload-button">Choose File</label>
+        <input id="file-input" type="file" name="file" onchange="updateFileName(event)">
+        <button class="upload-button" id="check-insights-button" onclick="submitFile()">Check Insights</button>
+    </div>
+
+    <div id="result-message" class="result-message"></div>
+
+    <!-- Lists Container -->
+    <div class="lists-container">
+        {% for category, items in data.items %}
+        <div class="list-box">
+            <h3>{{ category }}</h3>
+            <!-- Search Bar -->
+            <input type="text" class="search-bar" placeholder="Search {{ category }}" onkeyup="filterList(this)" />
+            <ul>
+                {% for item in items %}
+                <li>{{ item }}</li>
+                {% empty %}
+                <li>No data available</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Spinner and Overlay -->
+    <div class="overlay" id="overlay">
+        <div class="spinner"></div>
+    </div>
+
+    <script>
+        function updateFileName(event) {
+            const fileName = event.target.files[0]?.name || "No file selected";
+            document.getElementById("file-name").innerText = fileName;
+        }
+
+        let selectedFile = null;
+
+        document.getElementById('file-input').addEventListener('change', function(event) {
+            selectedFile = event.target.files[0];
+            const fileName = selectedFile?.name || "No file selected";
+            document.getElementById("file-name").innerText = fileName;
+        });
+
+        function submitFile() {
+            if (!selectedFile) {
+                document.getElementById("result-message").innerText = "Please select a file first.";
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('file', selectedFile);
+
+            showSpinner(); // Show spinner before processing starts
+
+            fetch("{% url 'account:check_insights' %}", {
+                method: "POST",
+                body: formData,
+                headers: {
+                    "X-CSRFToken": "{{ csrf_token }}"
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("result-message").innerText = data.message;
+                hideSpinner(); // Hide spinner after processing is complete
+
+                if (data.message.startsWith('Success')) {
+                    fetchUpdatedData(); // Refresh data once after successful upload
+                    updateUploadTimes();
+                }
+            })
+            .catch(error => {
+                document.getElementById("result-message").innerText = "An error occurred. Please try again.";
+                console.error(error);
+                hideSpinner(); // Ensure spinner hides even if there is an error
+            });
+        }
+
+        function fetchUpdatedData() {
+            fetch("{% url 'account:fetch_data' %}")
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Failed to fetch data");
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    const container = document.querySelector('.lists-container');
+                    container.innerHTML = ''; // Clear old content
+
+                    for (const [category, items] of Object.entries(data)) {
+                        const listBox = document.createElement('div');
+                        listBox.classList.add('list-box');
+
+                        const title = document.createElement('h3');
+                        title.textContent = category;
+
+                        // Create search bar
+                        const searchBar = document.createElement('input');
+                        searchBar.type = 'text';
+                        searchBar.classList.add('search-bar');
+                        searchBar.placeholder = `Search ${category}`;
+                        searchBar.onkeyup = function () {
+                            filterList(searchBar); // Reattach filter functionality
+                        };
+
+                        const ul = document.createElement('ul');
+                        items.forEach(item => {
+                            const li = document.createElement('li');
+                            li.textContent = item;
+                            ul.appendChild(li);
+                        });
+
+                        if (items.length === 0) {
+                            const li = document.createElement('li');
+                            li.textContent = 'No data available';
+                            ul.appendChild(li);
+                        }
+
+                        listBox.appendChild(title);
+                        listBox.appendChild(searchBar);
+                        listBox.appendChild(ul);
+                        container.appendChild(listBox);
+                    }
+                })
+                .catch(error => console.error('Error fetching data:', error));
+        }
+
+        function updateUploadTimes() {
+            fetch("{% url 'account:fetch_upload_times' %}")
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Failed to fetch upload times");
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // Format the times into the required format, including the timezone
+                    const formatDateWithTZ = (dateString) => {
+                        if (!dateString) {
+                            return "Never";
+                        }
+                        const date = new Date(dateString);
+                        const timeZone = 'UTC'; // Hardcoded for UTC, change if needed
+                        return `${date.toISOString().slice(0, 19).replace('T', ' ')} (${timeZone})`;
+                    };
+
+                    // Update the text content for both upload times
+                    document.getElementById("latest-file-upload").textContent = `Latest File Upload: ${formatDateWithTZ(data.latest_file_upload)}`;
+                    document.getElementById("previous-file-upload").textContent = `Previous File Upload: ${formatDateWithTZ(data.previous_file_upload)}`;
+                })
+                .catch(error => console.error("Error fetching upload times:", error));
+        }
+
+        function showSpinner() {
+            document.getElementById('overlay').style.display = 'flex';
+        }
+
+        function hideSpinner() {
+            document.getElementById('overlay').style.display = 'none';
+        }
+
+        function filterList(searchBar) {
+            const query = searchBar.value.toLowerCase();
+            const listBox = searchBar.nextElementSibling; // The `<ul>` element
+            const items = listBox.getElementsByTagName('li');
+
+            for (let item of items) {
+                const text = item.textContent.toLowerCase();
+                if (text.includes(query)) {
+                    item.style.display = ''; // Show the item
+                } else {
+                    item.style.display = 'none'; // Hide the item
+                }
+            }
+        }
+    </script>
+</body>
+</html>

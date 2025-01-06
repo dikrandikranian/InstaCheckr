@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InstaInsights - Home</title>
+    {% load static %} <!-- Load the static tag library -->
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body.instagram-theme {
+            background: linear-gradient(to bottom, #fdf497, #fd5949, #d6249f, #285AEB);
+            font-family: 'Arial', sans-serif;
+            color: white;
+            text-align: center;
+            padding: 50px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: auto;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .auth-buttons .btn {
+            display: inline-block;
+            margin: 10px;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            background-color: #3897f0;
+            color: white;
+        }
+
+        .btn-secondary {
+            background-color: #e1306c;
+            color: white;
+        }
+
+        .btn-primary:hover, .btn-secondary:hover {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body class="instagram-theme">
+    <div class="container">
+        <h1>Welcome to InstaInsights</h1>
+        <div class="auth-buttons">
+            <a href="{% url 'signup' %}" class="btn btn-primary">Sign Up</a>
+            <a href="{% url 'signin' %}" class="btn btn-secondary">Sign In</a>
+        </div>
+    </div>
+</body>
+</html>
