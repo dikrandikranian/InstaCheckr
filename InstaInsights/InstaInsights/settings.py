@@ -26,7 +26,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'fallback-key-for-local')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['instacheckr.com', 'www.instacheckr.com', 'ec2-13-48-131-45.eu-north-1.compute.amazonaws.com']
+ALLOWED_HOSTS = ['instacheckr.com', 'www.instacheckr.com', 'ec2-13-48-131-45.eu-north-1.compute.amazonaws.com', '13.48.131.45']
 
 
 # Application definition
@@ -124,6 +124,11 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# Additional directories for static files
+STATICFILES_DIRS = [
+    BASE_DIR / "static",  # Ensure your static directory is here
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

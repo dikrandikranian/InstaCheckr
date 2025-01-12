@@ -7,27 +7,166 @@
     {% load static %} <!-- Load the static tag library -->
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5687618358242815"
+     crossorigin="anonymous"></script>
     <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            max-width: 100%;
+        }
+
         body.instagram-theme {
             background: linear-gradient(to bottom, #fdf497, #fd5949, #d6249f, #285AEB);
             font-family: 'Arial', sans-serif;
             color: white;
             text-align: center;
-            padding: 50px;
+            margin: 0;
+            padding: 0;
             min-height: 100vh;
+            margin-bottom: 150px;
         }
 
-        .container {
-            max-width: 400px;
-            margin: auto;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 10px;
-            padding: 20px;
+        /* Header styles */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(8px); /* Blur effect behind header */
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            justify-content: space-between;
+            box-sizing: border-box;
         }
 
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
+        .header .project-name {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .project-name span:nth-child(1) {
+            color: #fd5949; /* Red for "Insta" */
+        }
+
+        .project-name span:nth-child(2) {
+            color: #b68a59; /* Lighter brown for "Check" */
+        }
+
+        .project-name span:nth-child(3) {
+            color: #3897f0; /* Blue for "r" */
+        }
+
+        .project-name:hover {
+            opacity: 0.9;
+        }
+
+        .header-buttons {
+            display: flex;
+            gap: 15px; /* Add space between buttons */
+            margin-right: 20px;
+        }
+
+        .header-button {
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: bold;
+            color: #285AEB; /* Button text color */
+            padding: 8px 16px; /* Add padding for a button-like appearance */
+            border: 2px solid transparent; /* Default border for spacing consistency */
+            border-radius: 5px; /* Rounded corners for buttons */
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s; /* Smooth transitions */
+        }
+
+        .header-button:hover {
+            background-color: #285AEB; /* Change background color on hover */
+            color: white; /* Change text color on hover */
+            border-color: #285AEB; /* Add border on hover */
+        }
+
+        .header-button:active {
+            background-color: #1b47a2; /* Darker shade for active state */
+            border-color: #1b47a2;
+        }
+
+        /* Intro text styles */
+        .intro-text {
+            margin-top: 100px; /* Slight space above the intro text */
+            font-family: 'Poppins', sans-serif;
+            box-sizing: border-box;
+            max-width: 100%;
+        }
+
+        .intro-text h2 {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #ffffff;
+        }
+
+        .intro-text h2 span {
+            color: #ffffff; /* White color for general text */
+        }
+
+        .intro-text h2 .highlight-pink {
+            color: #ff69b4; /* Pink color for Instagram */
+            text-decoration: none;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+
+        .intro-text h2 .highlight-pink:hover {
+            opacity: 0.8;
+        }
+
+        .intro-text h2 .highlight-pink:active {
+            opacity: 0.6;
+        }
+
+        .left-text {
+            white-space: normal; /* Allow text to wrap */
+            word-wrap: break-word; /* Break long words */
+            overflow-wrap: anywhere; /* Break words when necessary */
+            font-size: 1.2rem; /* Adjust size for smaller screens */
+        }
+
+        .highlight-red {
+            background-color: #d32f2f;
+            color: #ffffff;
+            padding: 0 3px; /* Adjust padding so only text is highlighted, not spaces */
+        }
+
+        .highlight-green {
+            background-color: #32CD32;
+            color: #ffffff;
+            padding: 0 3px; /* Adjust padding so only text is highlighted, not spaces */
+        }
+
+        /* Responsive behavior for mobile */
+        @media (max-width: 768px) {
+            .intro-text p {
+                flex-direction: column; /* Stack items vertically */
+                gap: 10px; /* Adds vertical spacing between items */
+            }
+
+            .intro-text p .separator {
+                display: none;
+            }
+        }
+
+        .auth-buttons {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
         }
 
         .auth-buttons .btn {
@@ -52,15 +191,876 @@
         .btn-primary:hover, .btn-secondary:hover {
             opacity: 0.9;
         }
+
+        /* Styling for the ad space */
+        .ad-space {
+            width: 100%;
+            height: 300px; /* Adjust the height as needed */
+            margin: 30px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #888;
+            font-size: 1rem;
+        }
+
+        /* Styling for the "How it works" title */
+        .how-it-works-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-align: center;
+            color: #000;
+            margin-top: 20px;
+        }
+
+        /* Styling for the diagram */
+        .diagram {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 30px;
+            text-align: center;
+            width: 90%; /* Adjust width to spread across the screen */
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+        }
+
+        .step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            flex: 1;
+        }
+
+        .ball {
+            width: 120px;
+            height: 120px;
+            border: 3px solid black; /* Black border for the ball */
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1rem;
+            font-weight: bold;
+            background-color: transparent; /* Matches the page background */
+            color: black; /* Black text */
+            z-index: 2;
+        }
+
+        .step-title {
+            margin-top: 5px;
+            font-size: 16px;
+            color: black;
+            font-weight: bold;
+        }
+
+        /* Arrow container */
+        .arrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex: 0.1;
+        }
+
+        /* Smooth scroll behavior for buttons */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        #instruction-section {
+            background-color: #f0f0f0;
+            padding: 20px;
+            width: 80%; /* Set width to 80% of the screen */
+            margin: 40px auto; /* Center the section horizontally and add margin-top */
+            text-align: center;
+            border-top: 2px solid #ccc;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: subtle shadow for better visibility */
+            border-radius: 10px; /* Optional: rounded corners */
+        }
+
+        .toggle-button {
+            background-color: #ccc;
+            color: #000;
+            border: none;
+            padding: 10px 20px;
+            margin: 0 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .toggle-button.active {
+            background-color: #285AEB;
+            color: white;
+        }
+
+        .slides-wrapper {
+            overflow: hidden;
+            width: 100%;
+            max-width: 1200px;
+            height: 700px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .slides-container {
+            display: flex;
+            transition: transform 0.3s ease-in-out;
+            width: 100%;
+        }
+
+        .slide {
+            flex: 0 0 100%; /* Each slide takes up 100% of the container width */
+            height: 100%; /* Match the height of the wrapper */
+            text-align: center;
+            padding: 20px; /* Add spacing for content */
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: black;
+        }
+
+        .slide-content {
+            width: 80%; /* Adjust this percentage as needed */
+            max-width: 400px; /* Limit the maximum width */
+            height: 500px; /* Set a consistent height for all slides */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden; /* Prevent overflowing content */
+            border-radius: 10px; /* Optional: for consistent rounded corners */
+            background-color: #f9f9f9; /* Optional: background for empty areas */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: add a subtle shadow */
+        }
+
+        .slide-content img,
+        .slide-content video {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain; /* Preserve aspect ratio */
+        }
+
+        .slide p {
+            font-size: 1.2rem; /* Adjust text size for better readability */
+        }
+
+        .arrow-button {
+            background-color: rgba(40, 90, 235, 0.9);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 2rem;
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        #prev-slide {
+            left: 10px;
+        }
+
+        #next-slide {
+            right: 10px;
+        }
+
+        .arrow-button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        .fullscreen-mode {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .fullscreen-image {
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 10px;
+        }
+
+        .close-fullscreen {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            font-size: 16px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1001;
+        }
+
+        .close-fullscreen:hover {
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        .fullscreen-icon {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            font-size: 16px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1001;
+        }
+
+        .fullscreen-icon:hover {
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        .faq-panel {
+            margin-bottom: 20px; /* Increase space between panels */
+            background: #f5f5f5;
+            border-radius: 10px; /* Rounded corners for a more modern look */
+            padding: 20px; /* Double the padding to increase size */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for depth */
+            font-size: 1.2rem; /* Adjust text size for the entire panel */
+        }
+
+        .faq-header {
+            cursor: pointer;
+            padding: 20px; /* Increase padding to enlarge the clickable area */
+            font-weight: bold;
+            font-size: 1.5rem; /* Larger text for the question titles */
+            color: #000; /* Make the text black */
+            background-color: #e0e0e0; /* Slightly darker background for the header */
+            border-radius: 5px; /* Match panel corner radius */
+        }
+
+        .faq-body {
+            display: none;
+            padding: 20px; /* Double padding for more spacing */
+            font-size: 1.2rem; /* Increase font size for the answers */
+            color: #333; /* Dark gray for readability */
+            border-top: 2px solid #ddd; /* Thicker separator line */
+            background-color: #ffffff; /* Lighter background for contrast */
+        }
+
+        .section-divider {
+            border: none; /* Remove default border */
+            border-top: 2px dotted #ccc; /* Add a dotted line */
+            margin: 20px 0; /* Add spacing above and below */
+            width: 100%; /* Make it span the full width */
+            height: 0; /* No height */
+        }
+
+        /* Hide the menu and show the hamburger button on smaller screens */
+        @media (max-width: 768px) {
+            .header-buttons {
+                display: none;
+                flex-direction: column;
+                background-color: rgba(255, 255, 255, 0.9);
+                position: absolute;
+                top: 60px; /* Adjust based on header height */
+                right: 0;
+                width: 200px; /* Adjust width as needed */
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+                border-radius: 5px;
+            }
+
+            .header-buttons a {
+                padding: 10px;
+                border-bottom: 1px solid #ddd;
+            }
+
+            .hamburger-menu {
+                display: block;
+                background: none;
+                border: none;
+                font-size: 1.8rem;
+                color: #285AEB;
+                cursor: pointer;
+                padding: 5px;
+                margin: 0;
+                position: relative; /* Ensures it stays within the header */
+                z-index: 1000; /* Stays above other elements */
+                margin-right: 10px;
+            }
+
+
+            .header {
+                padding: 10px; /* Reduce padding for smaller screens */
+            }
+        }
+
+        /* Default state for larger screens */
+        @media (min-width: 769px) {
+            .hamburger-menu {
+                display: none;
+            }
+
+            .header-buttons {
+                display: flex;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .diagram {
+                transform: scale(0.7); /* Scale down the content to 80% */
+                transform-origin: top center; /* Ensure scaling is centered */
+                width: 100%; /* Prevent horizontal overflow */
+                margin: 0 auto; /* Center the content */
+            }
+        }
     </style>
 </head>
 <body class="instagram-theme">
-    <div class="container">
-        <h1>Welcome to InstaInsights</h1>
-        <div class="auth-buttons">
-            <a href="{% url 'signup' %}" class="btn btn-primary">Sign Up</a>
-            <a href="{% url 'signin' %}" class="btn btn-secondary">Sign In</a>
+    <!-- Header -->
+    <div class="header">
+        <a href="/" class="project-name">
+            <span>Insta</span><span>Check</span><span>r</span>
+        </a>
+        <button class="hamburger-menu" onclick="toggleMenu()">☰</button>
+        <div class="header-buttons" id="menu">
+            <a href="/signin" class="header-button">Sign In</a>
+            <a href="/signup" class="header-button">Sign Up</a>
+            <a href="#how-it-works-title" class="header-button scroll-link">How It Works</a>
+            <a href="#get-ig-data" class="header-button scroll-link">Get IG Data</a>
+            <a href="#faq-section" class="header-button scroll-link">FAQs</a>
         </div>
     </div>
+    <hr class="section-divider">
+
+    <!-- Introductory Text -->
+    <div class="intro-text">
+        <h2>
+            <span>Track your followers and followings on</span>
+            <a href="https://instagram.com" class="highlight-pink" target="_blank" rel="noopener noreferrer">Instagram</a>
+        </h2>
+        <span class="left-text">Discover who has <span class="highlight-red">Unfollowed</span> you and find your <span class="highlight-green">Fans</span></span>
+    </div>
+
+
+    <div class="auth-buttons">
+        <a href="{% url 'signup' %}" class="btn btn-primary">Sign Up</a>
+        <a href="{% url 'signin' %}" class="btn btn-secondary">Sign In</a>
+    </div>
+    <hr class="section-divider">
+
+    <!-- Ad Space Section -->
+    <div class="ad-space">
+    </div>
+    <hr class="section-divider">
+
+    <!-- "How it works" Title -->
+    <h2 id="how-it-works-title" class="how-it-works-title">How it works:</h2>
+
+    <!-- Diagram Section -->
+    <div class="diagram">
+        <!-- Step 1 -->
+        <div class="step">
+            <div class="ball">Sign in</div>
+            <div class="step-title">Step 1</div>
+        </div>
+        <!-- Arrow -->
+        <div class="arrow">
+            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="24" viewBox="0 0 50 24" fill="none">
+                <path d="M0 12H46M46 12L36 2M46 12L36 22" stroke="black" stroke-width="2" />
+            </svg>
+        </div>
+        <!-- Step 2 -->
+        <div class="step">
+            <div class="ball">Upload IG data</div>
+            <div class="step-title">Step 2</div>
+        </div>
+        <!-- Arrow -->
+        <div class="arrow">
+            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="24" viewBox="0 0 50 24" fill="none">
+                <path d="M0 12H46M46 12L36 2M46 12L36 22" stroke="black" stroke-width="2" />
+            </svg>
+        </div>
+        <!-- Step 3 -->
+        <div class="step">
+            <div class="ball">Check Insights</div>
+            <div class="step-title">Step 3</div>
+        </div>
+    </div>
+    <!-- Add space before the new section -->
+    <div style="margin-top: 50px;"></div>
+    <hr class="section-divider">
+    <!-- Add space before the new section -->
+    <div style="margin-top: 50px;"></div>
+
+
+    <!-- "How to get Instagram data" Title -->
+    <h2 id="get-ig-data" class="how-it-works-title">How to get Instagram data:</h2>
+
+    <div id="instruction-section">
+        <div style="text-align: center; margin-bottom: 20px;">
+            <button id="desktop-toggle" class="toggle-button active">Desktop</button>
+            <button id="mobile-toggle" class="toggle-button">Mobile</button>
+        </div>
+        <div class="slides-wrapper">
+            <button id="prev-slide" class="arrow-button">&larr;</button>
+            <div id="slides-container" class="slides-container">
+            <!-- Slides will be dynamically loaded here -->
+            </div>
+            <button id="next-slide" class="arrow-button">&rarr;</button>
+        </div>
+    </div>
+    <hr class="section-divider">
+
+    <!-- Ad Space Section -->
+    <div class="ad-space">
+    </div>
+    <hr class="section-divider">
+
+
+    <!-- Frequently Asked Questions Section -->
+    <section id="faq-section" style="margin: 50px 0; text-align: center;">
+      <h2 style="font-family: Arial, sans-serif; font-size: 2.5rem; font-weight: bold; margin-top: 20px; margin-bottom: 30px; color: black;">Frequently Asked Questions:</h2>
+      <div class="faq-container" style="width: 80%; margin: 0 auto; text-align: left;">
+        <!-- Question 1 -->
+        <div class="faq-panel">
+          <div class="faq-header" onclick="toggleFaq(this)">
+            Does InstaCheckr use Instagram credentials?
+          </div>
+          <div class="faq-body">
+            No, InstaCheckr does not and will never ask for your Instagram credentials.
+          </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="faq-panel">
+          <div class="faq-header" onclick="toggleFaq(this)">
+            Is my Instagram account safe from getting banned by using InstaCheckr?
+          </div>
+          <div class="faq-body">
+            Instagram accounts are totally safe. Unlike other thrid party apps, Instacheckr does not interact with the Instagram account itself, but with the data extracted from it.
+          </div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="faq-panel">
+          <div class="faq-header" onclick="toggleFaq(this)">
+            How does InstaCheckr work?
+          </div>
+          <div class="faq-body">
+            InstaCheckr automates the process of comparing your followers and following data. The same process can be done manually by a person, though it would require lots of time.
+          </div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="faq-panel">
+          <div class="faq-header" onclick="toggleFaq(this)">
+            Is InstaCheckr safe to use?
+          </div>
+          <div class="faq-body">
+            InstaCheckr is 100% safe and secure. Our system does not require nor save any Instagram account credential or sensitive information. As for the uploaded data and InstaCheckr credentials, we maintain high security protocols in order to protect our users' information.
+          </div>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="faq-panel">
+          <div class="faq-header" onclick="toggleFaq(this)">
+            How to contact support?
+          </div>
+          <div class="faq-body">
+            For any help in matters such as password change or account deletion, you can contact us directly on Instagram: @insta.checkr
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+        const desktopInstructions = [
+            {
+                text: "Tutorial - Desktop:", // Title for the slide
+                content: `<video controls width="100%">
+                            <source src="{% static 'users/desktop_tutorial_video.mp4' %}" type="video/mp4">
+                            Your browser does not support the video tag.
+                          </video>`
+            },
+            {
+                text: "Step 1: Open your IG profile and click on the bottom left icon:",
+                content:  `<img src="{% static 'users/desktop_step1.jpg' %}"
+                                alt="Instruction Example"
+                                class="fullscreen-enabled"
+                                style="width: 100%; max-width: 400px; object-fit: contain; border-radius: 10px;">`
+            },
+            {
+                text: "Step 2: Go to Settings:",
+                content:  `<img src="{% static 'users/desktop_step2.jpg' %}"
+                                alt="Instruction Example"
+                                class="fullscreen-enabled"
+                                style="width: 100%; max-width: 400px; object-fit: contain; border-radius: 10px;">`
+            },
+            {
+                text: "Step 3: Select Accounts Center:",
+                content:  `<img src="{% static 'users/desktop_step3.jpg' %}"
+                                alt="Instruction Example"
+                                class="fullscreen-enabled"
+                                style="width: 100%; max-width: 400px; object-fit: contain; border-radius: 10px;">`
+            },
+            {
+                text: "Step 4: Go to 'Your information and permissions':",
+                content:  `<img src="{% static 'users/desktop_step4.jpg' %}"
+                                alt="Instruction Example"
+                                class="fullscreen-enabled"
+                                style="width: 100%; max-width: 400px; object-fit: contain; border-radius: 10px;">`
+            },
+            {
+                text: "Step 5: Select 'Download your information':",
+                content:  `<img src="{% static 'users/desktop_step5.jpg' %}"
+                                alt="Instruction Example"
+                                class="fullscreen-enabled"
+                                style="width: 100%; max-width: 400px; object-fit: contain; border-radius: 10px;">`
+            },
+            {
+                text: "Step 6: Click on 'Download or transfer information':",
+                content:  `<img src="{% static 'users/desktop_step6.jpg' %}"
+                                alt="Instruction Example"
+                                class="fullscreen-enabled"
+                                style="width: 100%; max-width: 400px; object-fit: contain; border-radius: 10px;">`
+            },
+            {
+                text: "Step 7: Select 'Some of your information':",
+                content:  `<img src="{% static 'users/desktop_step7.jpg' %}"
+                                alt="Instruction Example"
+                                class="fullscreen-enabled"
+                                style="width: 100%; max-width: 400px; object-fit: contain; border-radius: 10px;">`
+            },
+            {
+                text: "Step 8: Check the 'followers and following' item and click on Next:",
+                content:  `<img src="{% static 'users/desktop_step8.jpg' %}"
+                                alt="Instruction Example"
+                                class="fullscreen-enabled"
+                                style="width: 100%; max-width: 400px; object-fit: contain; border-radius: 10px;">`
+            },
+            {
+                text: "Step 9: Choose 'Download to device':",
+                content:  `<img src="{% static 'users/desktop_step9.jpg' %}"
+                                alt="Instruction Example"
+                                class="fullscreen-enabled"
+                                style="width: 100%; max-width: 400px; object-fit: contain; border-radius: 10px;">`
+            },
+            {
+                text: "Step 10: Make sure to set the date range to 'All time' and the format to 'HTML' and click on Create Files:",
+                content:  `<img src="{% static 'users/desktop_step10.jpg' %}"
+                                alt="Instruction Example"
+                                class="fullscreen-enabled"
+                                style="width: 100%; max-width: 400px; object-fit: contain; border-radius: 10px;">`
+            },
+        ];
+
+        const mobileInstructions = [
+            {
+                text: "Tutorial - Mobile:", // Title for the slide
+                content: `<video controls width="100%">
+                            <source src="{% static 'users/mobile_tutorial_video.mp4' %}" type="video/mp4">
+                            Your browser does not support the video tag.
+                          </video>`
+            },
+            {
+                text: "Step 1: Open your IG profile and click on the top right icon:",
+                content:  `<img src="{% static 'users/mobile_step1.jpeg' %}"
+                                alt="Instruction Example"
+                                class="fullscreen-enabled"
+                                style="width: 100%; max-width: 400px; object-fit: contain; border-radius: 10px;">`
+            },
+            {
+                text: "Step 2: Go to Accounts Center:",
+                content:  `<img src="{% static 'users/mobile_step2.jpeg' %}"
+                                alt="Instruction Example"
+                                class="fullscreen-enabled"
+                                style="width: 100%; max-width: 400px; object-fit: contain; border-radius: 10px;">`
+            },
+            {
+                text: "Step 3: Access your information and permissions:",
+                content:  `<img src="{% static 'users/mobile_step3.jpeg' %}"
+                                alt="Instruction Example"
+                                class="fullscreen-enabled"
+                                style="width: 100%; max-width: 400px; object-fit: contain; border-radius: 10px;">`
+            },
+            {
+                text: "Step 4: Go to 'Download your information:'",
+                content:  `<img src="{% static 'users/mobile_step4.jpeg' %}"
+                                alt="Instruction Example"
+                                class="fullscreen-enabled"
+                                style="width: 100%; max-width: 400px; object-fit: contain; border-radius: 10px;">`
+            },
+            {
+                text: "Step 5: Click on 'Download or transfer information:'",
+                content:  `<img src="{% static 'users/mobile_step5.jpeg' %}"
+                                alt="Instruction Example"
+                                class="fullscreen-enabled"
+                                style="width: 100%; max-width: 400px; object-fit: contain; border-radius: 10px;">`
+            },
+            {
+                text: "Step 6: Select 'Some of your information:'",
+                content:  `<img src="{% static 'users/mobile_step6.jpeg' %}"
+                                alt="Instruction Example"
+                                class="fullscreen-enabled"
+                                style="width: 100%; max-width: 400px; object-fit: contain; border-radius: 10px;">`
+            },
+            {
+                text: "Step 7: Select 'Followers and followings' and then click on Next:",
+                content:  `<img src="{% static 'users/mobile_step7.jpeg' %}"
+                                alt="Instruction Example"
+                                class="fullscreen-enabled"
+                                style="width: 100%; max-width: 400px; object-fit: contain; border-radius: 10px;">`
+            },
+            {
+                text: "Step 8: Select the option to download to device:",
+                content:  `<img src="{% static 'users/mobile_step8.jpeg' %}"
+                                alt="Instruction Example"
+                                class="fullscreen-enabled"
+                                style="width: 100%; max-width: 400px; object-fit: contain; border-radius: 10px;">`
+            },
+            {
+                text: "Step 9: Select 'Date Range' and set it to 'All time':",
+                content:  `<img src="{% static 'users/mobile_step9.jpeg' %}"
+                                alt="Instruction Example"
+                                class="fullscreen-enabled"
+                                style="width: 100%; max-width: 400px; object-fit: contain; border-radius: 10px;">`
+            },
+            {
+                text: "Step 10: Make sure the format is set to 'HTML' and click on 'Create files':",
+                content:  `<img src="{% static 'users/mobile_step10.jpeg' %}"
+                                alt="Instruction Example"
+                                class="fullscreen-enabled"
+                                style="width: 100%; max-width: 400px; object-fit: contain; border-radius: 10px;">`
+            },
+        ];
+
+        const slidesContainer = document.getElementById("slides-container");
+        const desktopToggle = document.getElementById("desktop-toggle");
+        const mobileToggle = document.getElementById("mobile-toggle");
+
+        let activeInstructions = desktopInstructions;
+
+        let currentIndex = 0;
+
+        function renderSlides() {
+            slidesContainer.innerHTML = "";
+            activeInstructions.forEach((instruction, index) => {
+                const slide = document.createElement("div");
+                slide.classList.add("slide");
+
+                const contentWrapper = document.createElement("div");
+                contentWrapper.classList.add("slide-content");
+
+                contentWrapper.innerHTML = `${instruction.content || ""}`; // Add content here
+                slide.innerHTML = `<h2>${instruction.text}</h2>`;
+                slide.appendChild(contentWrapper);
+                slidesContainer.appendChild(slide);
+            });
+            currentIndex = 0; // Reset to the first slide
+            updateSlidePosition();
+            updateArrowState();
+        }
+
+        function updateSlidePosition() {
+            const offset = currentIndex * -100;
+            slidesContainer.style.transform = `translateX(${offset}%)`;
+        }
+
+        function updateArrowState() {
+            document.getElementById("prev-slide").disabled = currentIndex === 0;
+            document.getElementById("next-slide").disabled = currentIndex === activeInstructions.length - 1;
+        }
+
+        desktopToggle.addEventListener("click", () => {
+            activeInstructions = desktopInstructions;
+            desktopToggle.classList.add("active");
+            mobileToggle.classList.remove("active");
+            renderSlides();
+        });
+
+        mobileToggle.addEventListener("click", () => {
+            activeInstructions = mobileInstructions;
+            mobileToggle.classList.add("active");
+            desktopToggle.classList.remove("active");
+            renderSlides();
+        });
+
+        // Event listeners for arrow buttons
+        document.getElementById("prev-slide").addEventListener("click", () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateSlidePosition();
+                updateArrowState();
+            }
+        });
+
+        document.getElementById("next-slide").addEventListener("click", () => {
+            if (currentIndex < activeInstructions.length - 1) {
+                currentIndex++;
+                updateSlidePosition();
+                updateArrowState();
+            }
+        });
+
+        // Swipe functionality (optional if you want both swipe and arrows)
+        slidesContainer.addEventListener("touchstart", (e) => {
+            startX = e.touches[0].clientX;
+        });
+
+        slidesContainer.addEventListener("touchend", (e) => {
+            const endX = e.changedTouches[0].clientX;
+            const distance = startX - endX;
+            if (distance > 50 && currentIndex < activeInstructions.length - 1) {
+                currentIndex++;
+            } else if (distance < -50 && currentIndex > 0) {
+                currentIndex--;
+            }
+            updateSlidePosition();
+            updateArrowState();
+        });
+
+        // Initialize slides
+        renderSlides();
+
+        document.addEventListener("click", (e) => {
+            if (e.target.tagName === "IMG" && e.target.classList.contains("fullscreen-enabled")) {
+                // Check if Fullscreen API is supported
+                if (document.fullscreenEnabled) {
+                    e.target.requestFullscreen()
+                        .catch(err => console.error(`Error attempting to enable full-screen mode: ${err.message}`));
+                } else {
+                    console.warn("Fullscreen API is not supported in this browser.");
+                }
+            }
+        });
+
+        // Exit fullscreen when pressing the escape key
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape" && document.fullscreenElement) {
+                document.exitFullscreen();
+            }
+        });
+
+        function toggleFaq(element) {
+            const body = element.nextElementSibling;
+            if (body.style.display === "none" || body.style.display === "") {
+              body.style.display = "block";
+            } else {
+              body.style.display = "none";
+            }
+          }
+
+        // Add fullscreen icon to all images with the class "fullscreen-enabled"
+        document.querySelectorAll(".fullscreen-enabled").forEach((img) => {
+            // Create and append the fullscreen button
+            const fullscreenButton = document.createElement("button");
+            fullscreenButton.classList.add("fullscreen-icon");
+            fullscreenButton.textContent = "⤢";
+            fullscreenButton.style.position = "absolute";
+            fullscreenButton.style.bottom = "10px";
+            fullscreenButton.style.right = "10px";
+
+            // Position the button relative to the image
+            img.style.position = "relative";
+            img.parentNode.style.position = "relative";
+            img.parentNode.appendChild(fullscreenButton);
+
+            // Add event listener to open fullscreen
+            fullscreenButton.addEventListener("click", () => openFullscreen(img));
+        });
+
+        // Function to open fullscreen
+        function openFullscreen(img) {
+            // Create fullscreen overlay
+            const fullscreenOverlay = document.createElement("div");
+            fullscreenOverlay.classList.add("fullscreen-mode");
+
+            // Add the image to the overlay
+            const fullscreenImage = document.createElement("img");
+            fullscreenImage.src = img.src;
+            fullscreenImage.alt = img.alt;
+            fullscreenImage.classList.add("fullscreen-image");
+
+            // Add a close button to the overlay
+            const closeButton = document.createElement("button");
+            closeButton.classList.add("close-fullscreen");
+            closeButton.textContent = "X";
+
+            // Append image and close button to the overlay
+            fullscreenOverlay.appendChild(fullscreenImage);
+            fullscreenOverlay.appendChild(closeButton);
+
+            // Append overlay to the body
+            document.body.appendChild(fullscreenOverlay);
+
+            // Add event listener to close fullscreen on close button
+            closeButton.addEventListener("click", closeFullscreen);
+
+            // Close fullscreen on Escape key
+            document.addEventListener("keydown", handleEscapeKey);
+        }
+
+        // Function to close fullscreen
+        function closeFullscreen() {
+            const fullscreenOverlay = document.querySelector(".fullscreen-mode");
+            if (fullscreenOverlay) {
+                fullscreenOverlay.remove();
+            }
+            document.removeEventListener("keydown", handleEscapeKey);
+        }
+
+        // Function to handle Escape key
+        function handleEscapeKey(event) {
+            if (event.key === "Escape") {
+                closeFullscreen();
+            }
+        }
+
+        document.querySelectorAll('.scroll-link').forEach(button => {
+            button.addEventListener('click', function (event) {
+                event.preventDefault(); // Prevent default anchor behavior
+                const targetId = this.getAttribute('href'); // Get the target ID
+                const targetElement = document.querySelector(targetId); // Find the target element
+                if (targetElement) {
+                    const offset = 100; // Adjust the offset value (e.g., for a fixed header)
+                    const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - offset;
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth' // Enable smooth scrolling
+                    });
+                }
+            });
+        });
+
+        function toggleMenu() {
+            const menu = document.getElementById('menu');
+            menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
+        }
+    </script>
 </body>
 </html>

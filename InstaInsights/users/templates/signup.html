@@ -7,6 +7,8 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5687618358242815"
+     crossorigin="anonymous"></script>
     <style>
         body.instagram-theme {
             background: linear-gradient(to bottom, #fdf497, #fd5949, #d6249f, #285AEB);
@@ -17,12 +19,82 @@
             min-height: 100vh;
         }
 
+        /* Header styles */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(8px); /* Blur effect behind header */
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            justify-content: space-between;
+            box-sizing: border-box;
+        }
+
+        .header .project-name {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .project-name span:nth-child(1) {
+            color: #fd5949; /* Red for "Insta" */
+        }
+
+        .project-name span:nth-child(2) {
+            color: #b68a59; /* Lighter brown for "Check" */
+        }
+
+        .project-name span:nth-child(3) {
+            color: #3897f0; /* Blue for "r" */
+        }
+
+        .project-name:hover {
+            opacity: 0.9;
+        }
+
+        .header-buttons {
+            display: flex;
+            gap: 15px; /* Add space between buttons */
+            margin-right: 20px;
+        }
+
+        .header-button {
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: bold;
+            color: #285AEB; /* Button text color */
+            padding: 8px 16px; /* Add padding for a button-like appearance */
+            border: 2px solid transparent; /* Default border for spacing consistency */
+            border-radius: 5px; /* Rounded corners for buttons */
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s; /* Smooth transitions */
+        }
+
+        .header-button:hover {
+            background-color: #285AEB; /* Change background color on hover */
+            color: white; /* Change text color on hover */
+            border-color: #285AEB; /* Add border on hover */
+        }
+
+        .header-button:active {
+            background-color: #1b47a2; /* Darker shade for active state */
+            border-color: #1b47a2;
+        }
+
         .container {
             max-width: 400px;
             margin: auto;
             background: rgba(255, 255, 255, 0.2);
             border-radius: 10px;
             padding: 20px;
+            margin-top: 100px;
         }
 
         h1 {
@@ -102,9 +174,128 @@
             background-color: #4CAF50;
             color: white;
         }
+
+        /* Modal styles */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.7); /* Dark background with transparency */
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 600px;
+            text-align: left;
+            color: black;
+            position: relative;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            max-height: 80%;
+            overflow-y: auto;
+        }
+
+        .modal-content h2 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: black; /* Ensures heading text is black */
+        }
+
+        .modal-content p {
+            margin-bottom: 10px;
+            line-height: 1.5;
+            color: black; /* Ensures paragraph text is black */
+        }
+
+        .close {
+            color: #aaa;
+            font-size: 24px;
+            font-weight: bold;
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Hide the menu and show the hamburger button on smaller screens */
+        @media (max-width: 768px) {
+            .header-buttons {
+                display: none;
+                flex-direction: column;
+                background-color: rgba(255, 255, 255, 0.9);
+                position: absolute;
+                top: 60px; /* Adjust based on header height */
+                right: 0;
+                width: 200px; /* Adjust width as needed */
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+                border-radius: 5px;
+            }
+
+            .header-buttons a {
+                padding: 10px;
+                border-bottom: 1px solid #ddd;
+            }
+
+            .hamburger-menu {
+                display: block;
+                background: none;
+                border: none;
+                font-size: 1.8rem;
+                color: #285AEB;
+                cursor: pointer;
+                padding: 5px;
+                margin: 0;
+                position: relative; /* Ensures it stays within the header */
+                z-index: 1000; /* Stays above other elements */
+                margin-right: 10px;
+            }
+
+
+            .header {
+                padding: 10px; /* Reduce padding for smaller screens */
+            }
+        }
+
+        /* Default state for larger screens */
+        @media (min-width: 769px) {
+            .hamburger-menu {
+                display: none;
+            }
+
+            .header-buttons {
+                display: flex;
+            }
+        }
     </style>
 </head>
 <body class="instagram-theme">
+
+ <!-- Header -->
+    <div class="header">
+        <a href="/" class="project-name">
+            <span>Insta</span><span>Check</span><span>r</span>
+        </a>
+        <button class="hamburger-menu" onclick="toggleMenu()">☰</button>
+        <div class="header-buttons" id="menu">
+            <a href="/" class="header-button">Home</a>
+            <a href="/signin" class="header-button">Sign In</a>
+        </div>
+    </div>
+
     <div class="container">
         <h1>Sign Up</h1>
         {% if messages %}
@@ -134,7 +325,60 @@
             </div>
             <button type="submit">Sign Up</button>
         </form>
+        <p>By signing up, you agree to the
+            <a href="#" id="terms-link" style="color: #3897f0;">terms and conditions</a>.
+        </p>
         <p>Already have an account? <a href="{% url 'signin' %}">Sign In</a></p>
     </div>
+
+    <!-- Modal -->
+    <div id="terms-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Terms and Conditions</h2>
+            <p><strong>1. Acceptance of Terms:</strong> By signing up and using InstaCheckr, you agree to be bound by these Terms and Conditions.</p>
+            <p><strong>2. Description of Service:</strong> InstaCheckr allows users to track their Instagram followers and followings by uploading a data file.</p>
+            <p><strong>3. Eligibility:</strong> You must be at least 13 years old to use this service.</p>
+            <p><strong>4. Account Responsibility:</strong> You are responsible for maintaining the confidentiality of your account credentials.</p>
+            <p><strong>5. Data Usage and Privacy:</strong> Uploaded data is processed solely for tracking services.</p>
+            <p><strong>6. Prohibited Activities:</strong> You agree not to use this service for unlawful purposes.</p>
+            <p><strong>7. Accuracy of Information:</strong> We do not guarantee all results will be error-free.</p>
+            <p><strong>8. Limitation of Liability:</strong> InstaCheckr is provided "as is" and without warranties. InstaCheckr is not responsible for any actions or consequences commited by the user through the results generated.</p>
+        </div>
+    </div>
+
+    <script>
+        // Get the modal
+        const modal = document.getElementById("terms-modal");
+
+        // Get the link that opens the modal
+        const termsLink = document.getElementById("terms-link");
+
+        // Get the <span> element that closes the modal
+        const closeBtn = modal.querySelector(".close");
+
+        // Open the modal when the link is clicked
+        termsLink.onclick = function (event) {
+            event.preventDefault(); // Prevent default link behavior
+            modal.style.display = "block";
+        };
+
+        // Close the modal when the close button is clicked
+        closeBtn.onclick = function () {
+            modal.style.display = "none";
+        };
+
+        // Close the modal when clicking outside of the modal content
+        window.onclick = function (event) {
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        };
+
+        function toggleMenu() {
+            const menu = document.getElementById('menu');
+            menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
+        }
+    </script>
 </body>
 </html>

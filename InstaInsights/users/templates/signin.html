@@ -7,6 +7,8 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5687618358242815"
+     crossorigin="anonymous"></script>
     <style>
         body.instagram-theme {
             background: linear-gradient(to bottom, #fdf497, #fd5949, #d6249f, #285AEB);
@@ -17,12 +19,82 @@
             min-height: 100vh;
         }
 
+        /* Header styles */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(8px); /* Blur effect behind header */
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            justify-content: space-between;
+            box-sizing: border-box;
+        }
+
+        .header .project-name {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .project-name span:nth-child(1) {
+            color: #fd5949; /* Red for "Insta" */
+        }
+
+        .project-name span:nth-child(2) {
+            color: #b68a59; /* Lighter brown for "Check" */
+        }
+
+        .project-name span:nth-child(3) {
+            color: #3897f0; /* Blue for "r" */
+        }
+
+        .project-name:hover {
+            opacity: 0.9;
+        }
+
+        .header-buttons {
+            display: flex;
+            gap: 15px; /* Add space between buttons */
+            margin-right: 20px;
+        }
+
+        .header-button {
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: bold;
+            color: #285AEB; /* Button text color */
+            padding: 8px 16px; /* Add padding for a button-like appearance */
+            border: 2px solid transparent; /* Default border for spacing consistency */
+            border-radius: 5px; /* Rounded corners for buttons */
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s; /* Smooth transitions */
+        }
+
+        .header-button:hover {
+            background-color: #285AEB; /* Change background color on hover */
+            color: white; /* Change text color on hover */
+            border-color: #285AEB; /* Add border on hover */
+        }
+
+        .header-button:active {
+            background-color: #1b47a2; /* Darker shade for active state */
+            border-color: #1b47a2;
+        }
+
         .container {
             max-width: 400px;
             margin: auto;
             background: rgba(255, 255, 255, 0.2);
             border-radius: 10px;
             padding: 20px;
+            margin-top: 100px;
         }
 
         h1 {
@@ -102,9 +174,72 @@
             background-color: #4CAF50;
             color: white;
         }
+
+        /* Hide the menu and show the hamburger button on smaller screens */
+        @media (max-width: 768px) {
+            .header-buttons {
+                display: none;
+                flex-direction: column;
+                background-color: rgba(255, 255, 255, 0.9);
+                position: absolute;
+                top: 60px; /* Adjust based on header height */
+                right: 0;
+                width: 200px; /* Adjust width as needed */
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+                border-radius: 5px;
+            }
+
+            .header-buttons a {
+                padding: 10px;
+                border-bottom: 1px solid #ddd;
+            }
+
+            .hamburger-menu {
+                display: block;
+                background: none;
+                border: none;
+                font-size: 1.8rem;
+                color: #285AEB;
+                cursor: pointer;
+                padding: 5px;
+                margin: 0;
+                position: relative; /* Ensures it stays within the header */
+                z-index: 1000; /* Stays above other elements */
+                margin-right: 10px;
+            }
+
+
+            .header {
+                padding: 10px; /* Reduce padding for smaller screens */
+            }
+        }
+
+        /* Default state for larger screens */
+        @media (min-width: 769px) {
+            .hamburger-menu {
+                display: none;
+            }
+
+            .header-buttons {
+                display: flex;
+            }
+        }
     </style>
 </head>
 <body class="instagram-theme">
+
+ <!-- Header -->
+    <div class="header">
+        <a href="/" class="project-name">
+            <span>Insta</span><span>Check</span><span>r</span>
+        </a>
+        <button class="hamburger-menu" onclick="toggleMenu()">☰</button>
+        <div class="header-buttons" id="menu">
+            <a href="/" class="header-button">Home</a>
+            <a href="/signup" class="header-button">Sign Up</a>
+        </div>
+    </div>
+
     <div class="container">
         <h1>Sign In</h1>
 
@@ -131,5 +266,12 @@
         </form>
         <p>Don't have an account? <a href="{% url 'signup' %}">Sign Up</a></p>
     </div>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('menu');
+            menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
+        }
+    </script>
 </body>
 </html>
