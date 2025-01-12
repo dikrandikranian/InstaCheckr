@@ -216,15 +216,15 @@
         /* Styling for the diagram */
         .diagram {
             display: flex;
-            justify-content: space-between;
+            justify-content: center; /* Center-align the entire diagram */
             align-items: center;
-            margin-top: 30px;
+            margin: 30px auto; /* Center it horizontally */
             text-align: center;
-            width: 90%; /* Adjust width to spread across the screen */
+            width: 90%; /* Maintain the responsive width */
             max-width: 1200px;
-            margin-left: auto;
-            margin-right: auto;
             position: relative;
+            transform: scale(0.8); /* Scale down for smaller screens */
+            transform-origin: center center; /* Ensure it scales around its center */
         }
 
         .step {
@@ -533,7 +533,7 @@
         @media (max-width: 768px) {
             .diagram {
                 transform: scale(0.7); /* Scale down the content to 80% */
-                transform-origin: top center; /* Ensure scaling is centered */
+                transform-origin: center center; /* Ensure scaling is centered */
                 width: 100%; /* Prevent horizontal overflow */
                 margin: 0 auto; /* Center the content */
             }
